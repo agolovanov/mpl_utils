@@ -1,0 +1,14 @@
+[project]
+name = "mpl_utils"
+version = "0.1.0"
+description = "Various utilities for matplotlib"
+authors = [
+    {name = "Anton Golovanov"},
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["mpl_utils*"]
