@@ -82,3 +82,45 @@ def calculate_extent(xdata, ydata):
     """
     import numpy as np
     return np.min(xdata), np.max(xdata), np.min(ydata), np.max(ydata)
+
+
+DEFAULT_DASHES = [[], [3, 1], [1, 1], [3, 1, 1, 1], [3, 1, 1, 1, 1, 1], [5, 1]]
+
+
+def setup_dash_cycle(dash_styles=DEFAULT_DASHES):
+    """Updates the current matplotlib cycler to include line dashes
+
+    Parameters
+    ----------
+    dash_styles : list, optional
+        the list of dash lists, by default DEFAULT_DASHES
+    """
+    from cycler import cycler
+    import itertools
+    import matplotlib.pyplot as plt
+
+    default_cycler = plt.rcParams['axes.prop_cycle']
+    cycler_dict = default_cycler.by_key()
+
+    cycler_dict['dashes'] = list(itertools.islice(itertools.cycle(dash_styles), len(default_cycler)))
+
+    new_cycler = cycler(**cycler_dict)
+
+    plt.rc('axes', prop_cycle=new_cycler)
+
+
+def remove_grid(ax, tick_params: dict = {'direction': 'in', 'length': 2}):
+    """Removes the grid from the axes and changes tick style.
+
+    Useful for imshow and similar plots.
+
+    Parameters
+    ----------
+    ax : matplotlib.axes.Axes
+        the affected axes
+    tick_params : dict, optional
+        ax.tick_params arguments, by default {'direction': 'in', 'length': 2}
+    """
+    ax.grid(False)
+    ax.set_axisbelow(False)
+    ax.tick_params(**tick_params)
