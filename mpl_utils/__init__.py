@@ -1,3 +1,14 @@
+import matplotlib as mpl
+from matplotlib.colors import LinearSegmentedColormap
+
+colormaps = {}
+colormaps['white_red'] = LinearSegmentedColormap.from_list("laser", ['#ffffff', '#b00707'])
+colormaps['white_green'] = LinearSegmentedColormap.from_list("bunch", ['#ffffff', '#1f8742'])
+
+for name in colormaps:
+    mpl.colormaps.register(colormaps[name], name=name)
+
+
 def mix_images(image_array):
     """
     Calculates a new image by mixing several images.
