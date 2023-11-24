@@ -135,3 +135,27 @@ def remove_grid(ax, tick_params: dict = {'direction': 'in', 'length': 2}):
     ax.grid(False)
     ax.set_axisbelow(False)
     ax.tick_params(**tick_params)
+
+
+def add_label(ax, text: str, xpos: float = 0.02, ypos: float = 0.95, *, fontsize: str = 'small', ha: str = 'left',
+              va: str = 'center'):
+    """Puts a text label on the graph
+
+    Parameters
+    ----------
+    ax : matplotlib.axes.Axes
+        axes to apply the label to
+    text : str
+        text of the label
+    xpos : float, optional
+        x position, by default 0.02
+    ypos : float, optional
+        y position, by default 0.95
+    fontsize : str, optional
+        font size, by default 'small'
+    ha : str, optional
+        horizontal alignment, by default 'left'
+    va : str, optional
+        vertical alignment, by default 'center'
+    """
+    ax.text(xpos, ypos, text, horizontalalignment=ha, verticalalignment=va, transform=ax.transAxes, fontsize=fontsize)
