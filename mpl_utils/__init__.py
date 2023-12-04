@@ -138,7 +138,7 @@ def remove_grid(ax, tick_params: dict = {'direction': 'in', 'length': 2}):
 
 
 def add_label(ax, text: str, xpos: float = 0.02, ypos: float = 0.95, *, fontsize: str = 'small', ha: str = 'left',
-              va: str = 'center'):
+              va: str = 'center', **kwargs):
     """Puts a text label on the graph
 
     Parameters
@@ -157,5 +157,8 @@ def add_label(ax, text: str, xpos: float = 0.02, ypos: float = 0.95, *, fontsize
         horizontal alignment, by default 'left'
     va : str, optional
         vertical alignment, by default 'center'
+    kwargs : dict
+        will be passed to the ax.text() call
     """
-    ax.text(xpos, ypos, text, horizontalalignment=ha, verticalalignment=va, transform=ax.transAxes, fontsize=fontsize)
+    ax.text(xpos, ypos, text, horizontalalignment=ha, verticalalignment=va, transform=ax.transAxes, fontsize=fontsize, **kwargs)
+    
