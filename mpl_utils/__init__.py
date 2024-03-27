@@ -76,7 +76,7 @@ def axes_mix_images(ax, **kwargs):
     ax.imshow(rgb_values, **auto_kwargs)
 
 
-def calculate_extent(xdata, ydata):
+def calculate_extent(xdata, ydata, add_pixel_pad=False):
     """Calculates extent for the data on x-y grid for the imshow method.
 
     Parameters
@@ -85,14 +85,23 @@ def calculate_extent(xdata, ydata):
         data to be used to determine the x-axis extent
     ydata : np.array or similar
         data to be used to determine the y-axis extent
-
+    add_pixel_pad : bool, optional
+        adds a padding to the ranges, so that the centers of the imshow pixels will be exactly in the middle
+        of the data point, default False
+        Assumes that the data arrays are equally spaced arrays.
+        Mostly relevant for arrays with a small number of points.
     Returns
     -------
     tuple
         4 numbers representing the extent as expected by the plt.imshow method.
     """
     import numpy as np
-    return np.min(xdata), np.max(xdata), np.min(ydata), np.max(ydata)
+    if add_pixel_pad:
+        dx = 0.5 * (xdata[1] - xdata[0])
+        dy = 0.5 * (ydata[1] - ydata[0])
+        return np.min(xdata) - dx, np.max(xdata) + dx, np.min(ydata) - dy, np.max(ydata) + dy
+    else:
+        return np.min(xdata), np.max(xdata), np.min(ydata), np.max(ydata)
 
 
 DEFAULT_DASHES = [[], [3, 1], [1, 1], [3, 1, 1, 1], [3, 1, 1, 1, 1, 1], [5, 1]]
