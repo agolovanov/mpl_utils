@@ -129,18 +129,21 @@ def setup_dash_cycle(dash_styles=DEFAULT_DASHES):
     plt.rc('axes', prop_cycle=new_cycler)
 
 
-def remove_grid(ax, tick_params: dict = {'direction': 'in', 'length': 2}):
+def remove_grid(ax=None, tick_params: dict = {'direction': 'in', 'length': 2}):
     """Removes the grid from the axes and changes tick style.
 
     Useful for imshow and similar plots.
 
     Parameters
     ----------
-    ax : matplotlib.axes.Axes
-        the affected axes
+    ax : matplotlib.axes.Axes, optional
+        the affected axes. By default, the current axis will be used
     tick_params : dict, optional
         ax.tick_params arguments, by default {'direction': 'in', 'length': 2}
     """
+    if ax is None:
+        import matplotlib.pyplot as plt
+        ax = plt.gca()
     ax.grid(False)
     ax.set_axisbelow(False)
     ax.tick_params(**tick_params)

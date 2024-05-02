@@ -1,6 +1,6 @@
 [project]
 name = "mpl_utils"
-version = "0.5.2"
+version = "0.5.3"
 description = "Various utilities for matplotlib"
 authors = [
     {name = "Anton Golovanov"},
