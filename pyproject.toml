@@ -5,6 +5,7 @@ description = "Various utilities for matplotlib"
 authors = [
     {name = "Anton Golovanov"},
 ]
+dynamic = ["dependencies"]
 
 [build-system]
 requires = ["setuptools"]
@@ -12,3 +13,6 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["mpl_utils*"]
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.txt"] }
