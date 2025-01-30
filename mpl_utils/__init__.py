@@ -2,8 +2,8 @@ import matplotlib as mpl
 from matplotlib.colors import LinearSegmentedColormap
 
 colormaps = {}
-colormaps['white_red'] = LinearSegmentedColormap.from_list("laser", ['#ffffff', '#b00707'])
-colormaps['white_green'] = LinearSegmentedColormap.from_list("bunch", ['#ffffff', '#1f8742'])
+colormaps['white_red'] = LinearSegmentedColormap.from_list('laser', ['#ffffff', '#b00707'])
+colormaps['white_green'] = LinearSegmentedColormap.from_list('bunch', ['#ffffff', '#1f8742'])
 
 for name in colormaps:
     mpl.colormaps.register(colormaps[name], name=name)
@@ -22,6 +22,7 @@ def mix_images(image_array):
     -------
     An array of the RGBA values of the resulting image.
     """
+
     def get_rgb_data(image):
         return image.cmap(image.norm(image.get_array()))
 
@@ -29,6 +30,7 @@ def mix_images(image_array):
 
     # mixing of colors is based on x = (x1 + x2) / (1 + x1 x2) formula for 1 - R, 1 - G, 1 - B.
     from functools import reduce
+
     return reduce(lambda x, y: x * y / (2 - x - y + x * y), rgb_array)
 
 
@@ -96,6 +98,7 @@ def calculate_extent(xdata, ydata, add_pixel_pad=False):
         4 numbers representing the extent as expected by the plt.imshow method.
     """
     import numpy as np
+
     if add_pixel_pad:
         dx = 0.5 * (xdata[1] - xdata[0])
         dy = 0.5 * (ydata[1] - ydata[0])
@@ -143,14 +146,24 @@ def remove_grid(ax=None, tick_params: dict = {'direction': 'in', 'length': 2}):
     """
     if ax is None:
         import matplotlib.pyplot as plt
+
         ax = plt.gca()
     ax.grid(False)
     ax.set_axisbelow(False)
     ax.tick_params(**tick_params)
 
 
-def add_label(ax, text: str, xpos: float = 0.02, ypos: float = 0.95, *, fontsize: str = 'small', ha: str = 'left',
-              va: str = 'center', **kwargs):
+def add_label(
+    ax,
+    text: str,
+    xpos: float = 0.02,
+    ypos: float = 0.95,
+    *,
+    fontsize: str = 'small',
+    ha: str = 'left',
+    va: str = 'center',
+    **kwargs,
+):
     """Puts a text label on the graph
 
     Parameters
@@ -172,5 +185,13 @@ def add_label(ax, text: str, xpos: float = 0.02, ypos: float = 0.95, *, fontsize
     kwargs : dict
         will be passed to the ax.text() call
     """
-    ax.text(xpos, ypos, text, horizontalalignment=ha, verticalalignment=va, transform=ax.transAxes, fontsize=fontsize, **kwargs)
-    
+    ax.text(
+        xpos,
+        ypos,
+        text,
+        horizontalalignment=ha,
+        verticalalignment=va,
+        transform=ax.transAxes,
+        fontsize=fontsize,
+        **kwargs,
+    )
