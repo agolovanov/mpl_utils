@@ -1,0 +1,7 @@
+{
+  "exclude": [
+    "**/__pycache__",
+    "**/.ipynb_checkpoints",
+  ],
+  "typeCheckingMode": "off"
+}
