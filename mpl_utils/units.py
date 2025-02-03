@@ -36,7 +36,7 @@ def format_label_units(label: str, units: pint.Unit | None, units_format: str = 
         return f'{label}, {units_label}'
 
 
-def set_xlabel(ax: 'mpl.axes.Axes', label: str):
+def set_xlabel(ax: 'mpl.axes.Axes', label: str, **kwargs):
     """Set the x-axis label with automatically determined units.
 
     Parameters
@@ -45,11 +45,13 @@ def set_xlabel(ax: 'mpl.axes.Axes', label: str):
         the axes
     label : str
         the base label (without units)
+    **kwargs :
+        passed to `ax.set_xlabel`
     """
-    ax.set_xlabel(format_label_units(label, ax.xaxis.units))
+    ax.set_xlabel(format_label_units(label, ax.xaxis.units), **kwargs)
 
 
-def set_ylabel(ax: 'mpl.axes.Axes', label: str):
+def set_ylabel(ax: 'mpl.axes.Axes', label: str, **kwargs):
     """Set the y-axis label with automatically determined units.
 
     Parameters
@@ -58,6 +60,8 @@ def set_ylabel(ax: 'mpl.axes.Axes', label: str):
         the axes
     label : str
         the base label (without units)
+    **kwargs :
+        passed to `ax.set_ylabel`
     """
 
-    ax.set_ylabel(format_label_units(label, ax.yaxis.units))
+    ax.set_ylabel(format_label_units(label, ax.yaxis.units), **kwargs)
